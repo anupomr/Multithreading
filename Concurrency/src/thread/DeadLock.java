@@ -27,6 +27,10 @@ public class DeadLock {
 	}
 	public static void main(String[] args) {
 		DeadLock d = new DeadLock();
+		Thread thread1 = new Thread(new T1(d));
+		Thread thread2 = new Thread(new T2(d));
+		thread1.start();
+		thread2.start();
 	}
 
 }
