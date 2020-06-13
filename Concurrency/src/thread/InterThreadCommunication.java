@@ -42,3 +42,32 @@ class ProducerThread extends Thread {
 		}
 	}
 }
+
+class ConsumerThread extends Thread {
+	Queue<Integer> q;
+
+	public ConsumerThread(Queue<Integer> q) {
+		// TODO Auto-generated constructor stub
+		this.q = q;
+	}
+
+	public void run() {
+		while (true) {
+			synchronized (q) {
+				while (q.isEmpty()) {
+					try {
+						System.out.println(Thread.currentThread().getName() +
+								" q is empty waiting Producer to produce");
+						q.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				System.out.println(" Item consumed :  "+q.remove());				
+				q.notifyAll();
+			}
+		}
+	}
+
+}
