@@ -1,12 +1,21 @@
 package thread;
 
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
+
 
 public class InterThreadCommunication {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	Queue<Integer> q = new LinkedList<>();
+		
+		ProducerThread producer = new ProducerThread(q, "Producer");
+		ProducerThread newProducer = new ProducerThread(q, "NewProducer");
+		ConsumerThread consumer = new ConsumerThread(q);
+		producer.start();
+		newProducer.start();
+		consumer.start();
 
 	}
 
