@@ -5,6 +5,17 @@ public class DeadLock {
 	Resource resource2 = new Resource();
 
 	public void method1() {
+		synchronized (resource2) {
+			System.out.println("Aquired lock on resource2 by :" +
+					Thread.currentThread());
+			synchronized (resource1) {
+				System.out.println("Aquired lock on resource1 by :" +
+						Thread.currentThread());
+			}
+		}
+	}
+
+	public void method2() {
 		synchronized (resource1) {
 			System.out.println("Aquired lock on resource1 by :" +
 					Thread.currentThread());
@@ -14,7 +25,6 @@ public class DeadLock {
 			}
 		}
 	}
-
 	public static void main(String[] args) {
 		DeadLock d = new DeadLock();
 	}
@@ -34,5 +44,18 @@ class T1 implements Runnable {
 	@Override
 	public void run() {
 		d.method1();
+	}
+}
+
+class T2 implements Runnable {
+	DeadLock d;
+
+	T2(DeadLock d) {
+		this.d = d;
+	}
+
+	@Override
+	public void run() {
+		d.method2();
 	}
 }
