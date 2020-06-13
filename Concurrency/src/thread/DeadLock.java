@@ -23,3 +23,16 @@ public class DeadLock {
 
 class Resource {
 }
+
+class T1 implements Runnable {
+	DeadLock d;
+
+	T1(DeadLock d) {
+		this.d = d;
+	}
+
+	@Override
+	public void run() {
+		d.method1();
+	}
+}
