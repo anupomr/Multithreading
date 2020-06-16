@@ -2,6 +2,7 @@ package thread.concurrent;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.concurrent.CountDownLatch;
 
 public class CopyOnWriteArraySetImp {
 
