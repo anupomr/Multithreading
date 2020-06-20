@@ -28,7 +28,7 @@ interface MyFunctionalInterface{
 	public void funMethodAdd(int a, int b);
 }
 
-@FunctionalInterface
+
 interface ValidFunctionalInterface{
 	public int funMethodLength(String s);
 }
